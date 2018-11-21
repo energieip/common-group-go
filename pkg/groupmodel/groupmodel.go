@@ -21,59 +21,59 @@ const (
 
 //GroupBase
 type GroupBase struct {
-	Group              int     `gorethink:"group" json:"group"` //groupID
-	SensorRule         *string `gorethink:"sensor_rule" json:"sensorRule"`
-	Auto               *bool   `gorethink:"auto" json:"auto"`
-	SlopeStart         *int    `gorethink:"slope_start" json:"slopeStart"`
-	SlopeStop          *int    `gorethink:"slope_stop" json:"slopeStop"`
-	Watchdog           *int    `gorethink:"watchdog" json:"watchdog"`
-	CorrectionInterval *int    `gorethink:"correction_interval" json:"correctionInterval"`
-	GroupRules         *Rule   `gorethink:"group_rules" json:"groupRules"`
+	Group              int     `json:"group"` //groupID
+	SensorRule         *string `json:"sensorRule"`
+	Auto               *bool   `json:"auto"`
+	SlopeStart         *int    `json:"slopeStart"`
+	SlopeStop          *int    `json:"slopeStop"`
+	Watchdog           *int    `json:"watchdog"`
+	CorrectionInterval *int    `json:"correctionInterval"`
+	GroupRules         *Rule   `json:"groupRules"`
 }
 
 //GroupConfig representation
 type GroupConfig struct {
 	GroupBase
-	Leds    []string `gorethink:"leds" json:"leds"` //Mac address list
-	Sensors []string `gorethink:"sensors" json:"sensors"`
+	Leds    []string `json:"leds"` //Mac address list
+	Sensors []string `json:"sensors"`
 }
 
 // Rule when the group is in automatic mode
 type Rule struct {
-	Brightness *int `gorethink:"brightness" json:"brightness"`
-	Presence   *int `gorethink:"presence" json:"presence"`
+	Brightness *int `json:"brightness"`
+	Presence   *int `json:"presence"`
 }
 
 type Setpoint struct {
-	SpLeds *int `gorethink:"sp_leds" json:"spLeds"`
+	SpLeds *int `json:"spLeds"`
 }
 
 //GroupRuntime runtime execution
 type GroupRuntime struct {
 	GroupBase
-	Setpoints *Setpoint             `gorethink:"setpoints" json:"setpoints"`
-	Leds      []driverled.Led       `gorethink:"leds" json:"leds"`
-	Sensors   []driversensor.Sensor `gorethink:"sensors" json:"sensors"`
+	Setpoints *Setpoint             `json:"setpoints"`
+	Leds      []driverled.Led       `json:"leds"`
+	Sensors   []driversensor.Sensor `json:"sensors"`
 }
 
 //GroupStatus status dump to the server
 type GroupStatus struct {
-	ID                 string   `gorethink:"id,omitempty" json:"ID"` //database if
-	Group              int      `gorethink:"group" json:"group"`     //groupID
-	SensorRule         string   `gorethink:"sensor_rule" json:"sensorRule"`
-	Auto               bool     `gorethink:"auto" json:"auto"`
-	SlopeStart         int      `gorethink:"slope_start" json:"slopeStart"`
-	SlopeStop          int      `gorethink:"slope_stop" json:"slopeStop"`
-	Watchdog           int      `gorethink:"watchdog" json:"watchdog"`
-	CorrectionInterval int      `gorethink:"correction_interval" json:"correctionInterval"`
-	GroupRules         Rule     `gorethink:"group_rules" json:"groupRules"`
-	Error              int      `gorethink:"error" json:"error"`
-	TimeToAuto         int      `gorethink:"time_to_auto" json:"timeToAuto"`
-	SetpointLeds       int      `gorethink:"setpoint_leds" json:"setpoint_leds"`
-	Presence           bool     `gorethink:"presence" json:"presence"`
-	TimeToLeave        int      `gorethink:"time_to_leave" json:"timeToLeave"`
-	Leds               []string `gorethink:"leds" json:"leds"` //Mac address list
-	Sensors            []string `gorethink:"sensors" json:"sensors"`
+	ID                 string   `json:"ID,omitempty"` //database id
+	Group              int      `json:"group"`        //groupID
+	SensorRule         string   `json:"sensorRule"`
+	Auto               bool     `json:"auto"`
+	SlopeStart         int      `json:"slopeStart"`
+	SlopeStop          int      `json:"slopeStop"`
+	Watchdog           int      `json:"watchdog"`
+	CorrectionInterval int      `json:"correctionInterval"`
+	GroupRules         Rule     `json:"groupRules"`
+	Error              int      `json:"error"`
+	TimeToAuto         int      `json:"timeToAuto"`
+	SetpointLeds       int      `json:"setpoint_leds"`
+	Presence           bool     `json:"presence"`
+	TimeToLeave        int      `json:"timeToLeave"`
+	Leds               []string `json:"leds"` //Mac address list
+	Sensors            []string `json:"sensors"`
 }
 
 // ToMapInterface convert group struct in Map[string] interface{}
