@@ -94,8 +94,8 @@ func (group GroupConfig) ToJSON() (string, error) {
 }
 
 //ToGroupConfig convert interface to group config object
-func ToGroupConfig(val interface{}) (*GroupStatus, error) {
-	var group GroupStatus
+func ToGroupConfig(val interface{}) (*GroupConfig, error) {
+	var group GroupConfig
 	inrec, err := json.Marshal(val)
 	if err != nil {
 		return nil, err
