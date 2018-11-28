@@ -29,6 +29,7 @@ type GroupBase struct {
 	Watchdog           *int    `json:"watchdog"`
 	CorrectionInterval *int    `json:"correctionInterval"`
 	GroupRules         *Rule   `json:"groupRules"`
+	FriendlyName       *string `json:"friendlyName"`
 }
 
 //GroupConfig representation
@@ -74,6 +75,7 @@ type GroupStatus struct {
 	TimeToLeave        int      `json:"timeToLeave"`
 	Leds               []string `json:"leds"` //Mac address list
 	Sensors            []string `json:"sensors"`
+	FriendlyName       string   `json:"friendlyName"`
 }
 
 // ToMapInterface convert group struct in Map[string] interface{}
