@@ -70,7 +70,7 @@ type GroupStatus struct {
 	GroupRules         Rule     `json:"groupRules"`
 	Error              int      `json:"error"`
 	TimeToAuto         int      `json:"timeToAuto"`
-	SetpointLeds       int      `json:"setpoint_leds"`
+	SetpointLeds       int      `json:"setpointLeds"`
 	Presence           bool     `json:"presence"`
 	TimeToLeave        int      `json:"timeToLeave"`
 	Leds               []string `json:"leds"` //Mac address list
