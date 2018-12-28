@@ -35,8 +35,9 @@ type GroupBase struct {
 //GroupConfig representation
 type GroupConfig struct {
 	GroupBase
-	Leds    []string `json:"leds"` //Mac address list
-	Sensors []string `json:"sensors"`
+	SetpointLeds *int     `json:"setpointLeds"`
+	Leds         []string `json:"leds"` //Mac address list
+	Sensors      []string `json:"sensors"`
 }
 
 // Rule when the group is in automatic mode
