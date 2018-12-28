@@ -22,38 +22,38 @@ const (
 //GroupBase
 type GroupBase struct {
 	Group              int     `json:"group"` //groupID
-	SensorRule         *string `json:"sensorRule"`
-	Auto               *bool   `json:"auto"`
-	SlopeStart         *int    `json:"slopeStart"`
-	SlopeStop          *int    `json:"slopeStop"`
-	Watchdog           *int    `json:"watchdog"`
-	CorrectionInterval *int    `json:"correctionInterval"`
-	GroupRules         *Rule   `json:"groupRules"`
-	FriendlyName       *string `json:"friendlyName"`
+	SensorRule         *string `json:"sensorRule,omitempty"`
+	Auto               *bool   `json:"auto,omitempty"`
+	SlopeStart         *int    `json:"slopeStart,omitempty"`
+	SlopeStop          *int    `json:"slopeStop,omitempty"`
+	Watchdog           *int    `json:"watchdog,omitempty"`
+	CorrectionInterval *int    `json:"correctionInterval,omitempty"`
+	GroupRules         *Rule   `json:"groupRules,omitempty"`
+	FriendlyName       *string `json:"friendlyName,omitempty"`
 }
 
 //GroupConfig representation
 type GroupConfig struct {
 	GroupBase
-	SetpointLeds *int     `json:"setpointLeds"`
+	SetpointLeds *int     `json:"setpointLeds,omitempty"`
 	Leds         []string `json:"leds"` //Mac address list
 	Sensors      []string `json:"sensors"`
 }
 
 // Rule when the group is in automatic mode
 type Rule struct {
-	Brightness *int `json:"brightness"`
-	Presence   *int `json:"presence"`
+	Brightness *int `json:"brightness,omitempty"`
+	Presence   *int `json:"presence,omitempty"`
 }
 
 type Setpoint struct {
-	SpLeds *int `json:"spLeds"`
+	SpLeds *int `json:"spLeds,omitempty"`
 }
 
 //GroupRuntime runtime execution
 type GroupRuntime struct {
 	GroupBase
-	Setpoints *Setpoint             `json:"setpoints"`
+	Setpoints *Setpoint             `json:"setpoints,omitempty"`
 	Leds      []driverled.Led       `json:"leds"`
 	Sensors   []driversensor.Sensor `json:"sensors"`
 }
