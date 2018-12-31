@@ -46,16 +46,12 @@ type Rule struct {
 	Presence   *int `json:"presence,omitempty"`
 }
 
-type Setpoint struct {
-	SpLeds *int `json:"spLeds,omitempty"`
-}
-
 //GroupRuntime runtime execution
 type GroupRuntime struct {
 	GroupBase
-	Setpoints *Setpoint             `json:"setpoints,omitempty"`
-	Leds      []driverled.Led       `json:"leds"`
-	Sensors   []driversensor.Sensor `json:"sensors"`
+	SetpointLeds *int                  `json:"setpointLeds,omitempty"`
+	Leds         []driverled.Led       `json:"leds"`
+	Sensors      []driversensor.Sensor `json:"sensors"`
 }
 
 //GroupStatus status dump to the server
