@@ -2,9 +2,6 @@ package groupmodel
 
 import (
 	"encoding/json"
-
-	"github.com/energieip/common-led-go/pkg/driverled"
-	"github.com/energieip/common-sensor-go/pkg/driversensor"
 )
 
 const (
@@ -19,39 +16,21 @@ const (
 	GroupConfigUrl = "update/settings"
 )
 
-//GroupBase
-type GroupBase struct {
-	Group              int     `json:"group"` //groupID
-	SensorRule         *string `json:"sensorRule,omitempty"`
-	Auto               *bool   `json:"auto,omitempty"`
-	SlopeStart         *int    `json:"slopeStart,omitempty"`
-	SlopeStop          *int    `json:"slopeStop,omitempty"`
-	Watchdog           *int    `json:"watchdog,omitempty"`
-	CorrectionInterval *int    `json:"correctionInterval,omitempty"`
-	GroupRules         *Rule   `json:"groupRules,omitempty"`
-	FriendlyName       *string `json:"friendlyName,omitempty"`
-}
-
 //GroupConfig representation
 type GroupConfig struct {
-	GroupBase
-	SetpointLeds *int     `json:"setpointLeds,omitempty"`
-	Leds         []string `json:"leds"` //Mac address list
-	Sensors      []string `json:"sensors"`
-}
-
-// Rule when the group is in automatic mode
-type Rule struct {
-	Brightness *int `json:"brightness,omitempty"`
-	Presence   *int `json:"presence,omitempty"`
-}
-
-//GroupRuntime runtime execution
-type GroupRuntime struct {
-	GroupBase
-	SetpointLeds *int                  `json:"setpointLeds,omitempty"`
-	Leds         []driverled.Led       `json:"leds"`
-	Sensors      []driversensor.Sensor `json:"sensors"`
+	Group              int      `json:"group"` //groupID
+	SensorRule         *string  `json:"sensorRule,omitempty"`
+	Auto               *bool    `json:"auto,omitempty"`
+	SlopeStart         *int     `json:"slopeStart,omitempty"`
+	SlopeStop          *int     `json:"slopeStop,omitempty"`
+	Watchdog           *int     `json:"watchdog,omitempty"`
+	CorrectionInterval *int     `json:"correctionInterval,omitempty"`
+	RuleBrightness     *int     `json:"ruleBrightness,omitempty"`
+	RulePresence       *int     `json:"rulePresence,omitempty"`
+	SetpointLeds       *int     `json:"setpointLeds,omitempty"`
+	FriendlyName       *string  `json:"friendlyName,omitempty"`
+	Leds               []string `json:"leds"` //Mac address list
+	Sensors            []string `json:"sensors"`
 }
 
 //GroupStatus status dump to the server
@@ -64,7 +43,8 @@ type GroupStatus struct {
 	SlopeStop          int      `json:"slopeStop"`
 	Watchdog           int      `json:"watchdog"`
 	CorrectionInterval int      `json:"correctionInterval"`
-	GroupRules         Rule     `json:"groupRules"`
+	RuleBrightness     *int     `json:"ruleBrightness,omitempty"`
+	RulePresence       *int     `json:"rulePresence,omitempty"`
 	Error              int      `json:"error"`
 	TimeToAuto         int      `json:"timeToAuto"`
 	SetpointLeds       int      `json:"setpointLeds"`
@@ -95,34 +75,6 @@ func (group GroupConfig) ToJSON() (string, error) {
 //ToGroupConfig convert interface to group config object
 func ToGroupConfig(val interface{}) (*GroupConfig, error) {
 	var group GroupConfig
-	inrec, err := json.Marshal(val)
-	if err != nil {
-		return nil, err
-	}
-	err = json.Unmarshal(inrec, &group)
-	return &group, err
-}
-
-// ToMapInterface convert group struct in Map[string] interface{}
-func (group GroupRuntime) ToMapInterface() map[string]interface{} {
-	var inInterface map[string]interface{}
-	inrec, _ := json.Marshal(group)
-	json.Unmarshal(inrec, &inInterface)
-	return inInterface
-}
-
-// ToJSON dump group struct
-func (group GroupRuntime) ToJSON() (string, error) {
-	inrec, err := json.Marshal(group)
-	if err != nil {
-		return "", err
-	}
-	return string(inrec[:]), err
-}
-
-//ToGroupRuntime convert interface to group runtime object
-func ToGroupRuntime(val interface{}) (*GroupRuntime, error) {
-	var group GroupRuntime
 	inrec, err := json.Marshal(val)
 	if err != nil {
 		return nil, err
